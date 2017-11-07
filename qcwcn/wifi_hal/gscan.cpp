@@ -161,7 +161,7 @@ wifi_error wifi_get_valid_channels(wifi_interface_handle handle,
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 wifi_error wifi_get_gscan_capabilities(wifi_interface_handle handle,
@@ -174,7 +174,7 @@ wifi_error wifi_get_gscan_capabilities(wifi_interface_handle handle,
     if (!(info->supported_feature_set & WIFI_FEATURE_GSCAN)) {
         ALOGE("%s: GSCAN is not supported by driver", __FUNCTION__);
         return WIFI_ERROR_NOT_SUPPORTED;
-     }
+    }
 
     if (capabilities == NULL) {
         ALOGE("%s: NULL capabilities pointer provided. Exit.", __FUNCTION__);
@@ -183,7 +183,7 @@ wifi_error wifi_get_gscan_capabilities(wifi_interface_handle handle,
 
     memcpy(capabilities, &info->capa.gscan_capa, sizeof(wifi_gscan_capabilities));
 
-    return ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 wifi_error wifi_start_gscan(wifi_request_id id,
@@ -396,7 +396,7 @@ cleanup:
             __FUNCTION__, ret);
         gScanStartCmdEventHandler->disableEventHandling();
     }
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 
 }
 
@@ -475,7 +475,7 @@ wifi_error wifi_stop_gscan(wifi_request_id id,
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Set the GSCAN BSSID Hotlist. */
@@ -638,7 +638,7 @@ cleanup:
             __FUNCTION__, ret);
         gScanSetBssidHotlistCmdEventHandler->disableEventHandling();
     }
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 wifi_error wifi_reset_bssid_hotlist(wifi_request_id id,
@@ -716,7 +716,7 @@ wifi_error wifi_reset_bssid_hotlist(wifi_request_id id,
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Set the GSCAN Significant AP Change list. */
@@ -890,7 +890,7 @@ cleanup:
         gScanSetSignificantChangeCmdEventHandler->disableEventHandling();
     }
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Clear the GSCAN Significant AP change list. */
@@ -971,7 +971,7 @@ wifi_error wifi_reset_significant_change_handler(wifi_request_id id,
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Get the GSCAN cached scan results. */
@@ -1095,7 +1095,7 @@ wifi_error wifi_get_cached_gscan_results(wifi_interface_handle iface,
 cleanup:
     gScanCommand->freeRspParams(eGScanGetCachedResultsRspParams);
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Random MAC OUI for PNO */
@@ -1150,7 +1150,7 @@ wifi_error wifi_set_scanning_mac_oui(wifi_interface_handle handle, oui scan_oui)
 
 cleanup:
     delete vCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 
@@ -1834,7 +1834,7 @@ cleanup:
             __FUNCTION__, ret);
         gScanSetPnoListCmdEventHandler->disableEventHandling();
     }
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Reset the ePNO list - no ePNO networks should be matched after this */
@@ -1904,7 +1904,7 @@ wifi_error wifi_reset_epno_list(wifi_request_id id, wifi_interface_handle iface)
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 /* Set the ePNO Passpoint List. */
@@ -2073,7 +2073,7 @@ cleanup:
             __FUNCTION__, ret);
         gScanPnoSetPasspointListCmdEventHandler->disableEventHandling();
     }
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 wifi_error wifi_reset_passpoint_list(wifi_request_id id,
@@ -2161,7 +2161,7 @@ wifi_error wifi_reset_passpoint_list(wifi_request_id id,
 
 cleanup:
     delete gScanCommand;
-    return (wifi_error)ret;
+    return mapErrorKernelToWifiHAL(ret);
 }
 
 int GScanCommand::allocCachedResultsTemp(int max,
